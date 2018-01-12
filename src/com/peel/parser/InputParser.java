@@ -39,7 +39,7 @@ public class InputParser {
 			rootObject = (JSONObject) new JSONParser().parse(new FileReader(filePath));
 		} catch (IOException | ParseException e) {
 			e.printStackTrace();
-		} ;
+		};
         
 		return rootObject; 
 	}
@@ -105,19 +105,17 @@ public class InputParser {
         	while(contentIterator.hasNext()) {
         	
 			JSONObject contentJSONObject = contentIterator.next();    	
-			Content content = new Content();
-
+			
 			// Get the Name of the content first
 			String contentName = (String) contentJSONObject.get("name");
-			content.setContentName(contentName);
-
+	
 			// Get preRoll names from preRollArray
 			List<String> preRollNamesList = getPreRollNames(contentJSONObject);
-			content.setPreRollNamesList(preRollNamesList);
-
+			
 			// Get videos from JSON Object
 			List<Video> videosList = getVideosFromJSON(contentJSONObject);
-			content.setContentVideoList(videosList);
+			
+			Content content = new Content(contentName,preRollNamesList,videosList);
 			contentList.add(content);
         	}
 		return contentList;
@@ -177,16 +175,13 @@ public class InputParser {
         	
 			JSONObject preRollJSONObject =  preRollIterator.next();
 
-			PreRoll preRoll = new PreRoll();
-
 			// Get preRoll name from JSON object
 			String preRollName = (String) preRollJSONObject.get("name");
-			preRoll.setName(preRollName);
-
+			
 			// Get videos from JSON Object
 			List<Video> videosList = getVideosFromJSON(preRollJSONObject);
-			preRoll.setPreRollVideoList(videosList);
-
+			
+			PreRoll preRoll = new PreRoll(preRollName,videosList);
 			// Add the preRoll to preRoll List
 			preRollList.add(preRoll);	
         	}
@@ -217,11 +212,11 @@ public class InputParser {
 			JSONObject videoJSONObject = videosIterator.next();
 
 			String name = (String) videoJSONObject.get("name");
-			video.setVideoName(name);
-
+			
 			JSONObject attributeJSONObject = (JSONObject) videoJSONObject.get("attributes");
 			Attribute attribute = getAttributeFromJSON(attributeJSONObject);
-			video.setVideoAttribute(attribute);
+			
+    			Video video = new Video(name,attribute);
 
 			videosList.add(video);
     		}
@@ -239,7 +234,6 @@ public class InputParser {
 	 */
 	public Attribute getAttributeFromJSON(JSONObject attributeJSONObject)  {
 		
-		Attribute attribute = new Attribute();
 		JSONArray countriesArray = (JSONArray) attributeJSONObject.get("countries");
 		
 		Iterator<String> countriesIterator = countriesArray.iterator();
@@ -249,14 +243,10 @@ public class InputParser {
 			String country = countriesIterator.next();
 			countries.add(country);
 		}
-		attribute.setCountries(countries);
-		
 		String language = (String) attributeJSONObject.get("language");
-		attribute.setLanguage(language);
-		
 		String aspectRatio = (String) attributeJSONObject.get("aspect");
-		attribute.setAspectRatio(aspectRatio);
-
+		
+		Attribute attribute = new Attribute(countries,language,aspectRatio);
 		return attribute;
 	}
 	
