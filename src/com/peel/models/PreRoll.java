@@ -2,33 +2,26 @@ package com.peel.models;
 
 import java.util.List;
 
-public class PreRoll {
+public final class PreRoll {
 	
-	private String name;
-	private List<Video> preRollVideoList;
+	private final String name;
+	private final List<Video> preRollVideoList;
 	
+	public PreRoll(String name, List<Video> preRollVideoList) {
+		this.name = name;
+		this.preRollVideoList = preRollVideoList;
+	}
+
 	public String getName() {
 		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
 	}
 	
 	public List<Video> getPreRollVideoList() {
 		return preRollVideoList;
 	}
 	
-	public void setPreRollVideoList(List<Video> preRollVideoList) {
-		this.preRollVideoList = preRollVideoList;
-	}
-
 	@Override
 	public String toString() {
 		return "PreRoll [name=" + name + ", preRollVideoList=" + preRollVideoList + "]";
 	}
-	
-	
-	
-	
 }
