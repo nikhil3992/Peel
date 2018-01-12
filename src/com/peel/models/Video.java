@@ -1,31 +1,25 @@
 package com.peel.models;
 
-public class Video {
+public final class Video {
 	
-	private String videoName;
-	private Attribute videoAttribute;
+	private final String videoName;
+	private final Attribute videoAttribute;
 	
+	public Video(String videoName, Attribute videoAttribute) {
+		this.videoName = videoName;
+		this.videoAttribute = videoAttribute;
+	}
+
 	public String getVideoName() {
 		return videoName;
-	}
-	
-	public void setVideoName(String videoName) {
-		this.videoName = videoName;
 	}
 	
 	public Attribute getVideoAttribute() {
 		return videoAttribute;
 	}
 	
-	public void setVideoAttribute(Attribute videoAttribute) {
-		this.videoAttribute = videoAttribute;
-	}
-
 	@Override
 	public String toString() {
 		return "Video [videoName=" + videoName + ", videoAttribute=" + videoAttribute + "]";
 	}
-	
-	
-	
 }
