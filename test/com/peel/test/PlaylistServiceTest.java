@@ -113,25 +113,18 @@ public class PlaylistServiceTest {
 	
 	}
 
-	/**
+		/**
 	 * Test for correctness of isAttributeMatching() method in PlaylistServiceImpl.java
 	 */
 	@Test
 	public void testIfAttributeMatching() {
+		
 		PlaylistServiceImpl serviceImpl = new PlaylistServiceImpl();
-
-		Attribute contentAttribute = new Attribute();
 		List<String> countries = new ArrayList<String>();
 		countries.add("US");
 		countries.add("UK");
-		contentAttribute.setAspectRatio("16:9");
-		contentAttribute.setLanguage("English");
-
-		Attribute preRollAttribute = new Attribute();
-		preRollAttribute.setCountries(countries);
-		preRollAttribute.setAspectRatio("16:9");
-		preRollAttribute.setLanguage("English");
-
+		Attribute contentAttribute = new Attribute(countries,"English","16:9");
+		Attribute preRollAttribute = new Attribute(countries,"English","16:9");
 		String inputCountry = "US";
 		assertTrue(serviceImpl.isAttributesMatching(contentAttribute, preRollAttribute, inputCountry));
 	}
@@ -141,20 +134,14 @@ public class PlaylistServiceTest {
 	 */
 	@Test
 	public void testIfAttributeNotMatching() {
+		
 		PlaylistServiceImpl serviceImpl = new PlaylistServiceImpl();
-
-		Attribute contentAttribute = new Attribute();
 		List<String> countries = new ArrayList<String>();
 		countries.add("US");
 		countries.add("UK");
-		contentAttribute.setAspectRatio("16:9");
-		contentAttribute.setLanguage("English");
-
-		Attribute preRollAttribute = new Attribute();
-		preRollAttribute.setCountries(countries);
-		preRollAttribute.setAspectRatio("4:9");
-		preRollAttribute.setLanguage("English");
-
+		
+		Attribute contentAttribute = new Attribute(countries,"English","16:9");
+		Attribute preRollAttribute = new Attribute(countries,"English","4:9");
 		String inputCountry = "US";
 		assertFalse(serviceImpl.isAttributesMatching(contentAttribute, preRollAttribute, inputCountry));
 	}
@@ -164,14 +151,12 @@ public class PlaylistServiceTest {
 	 */
 	@Test
 	public void testIfCountryMatch() {
+		
 		PlaylistServiceImpl serviceImpl = new PlaylistServiceImpl();
-
-		Attribute contentAttribute = new Attribute();
 		List<String> countries = new ArrayList<String>();
 		countries.add("US");
 		countries.add("UK");
-		contentAttribute.setCountries(countries);
-
+		Attribute contentAttribute = new Attribute(countries,"English","16:9");
 		assertTrue(serviceImpl.checkCountryMatch(contentAttribute, "US"));
 	}
 
@@ -182,13 +167,10 @@ public class PlaylistServiceTest {
 	public void testIfCountryMismatch() {
 
 		PlaylistServiceImpl serviceImpl = new PlaylistServiceImpl();
-
-		Attribute contentAttribute = new Attribute();
 		List<String> countries = new ArrayList<String>();
 		countries.add("US");
 		countries.add("UK");
-		contentAttribute.setCountries(countries);
-		
+		Attribute contentAttribute = new Attribute(countries,"English","16:9");
 		assertFalse(serviceImpl.checkCountryMatch(contentAttribute, "CA"));
 	}
 	
