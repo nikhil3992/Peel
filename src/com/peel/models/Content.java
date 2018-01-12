@@ -2,7 +2,7 @@ package com.peel.models;
 
 import java.util.List;
 
-public class Content {
+public final class Content {
 	
 	private final String contentName;
 	private final List<String> preRollNamesList;
