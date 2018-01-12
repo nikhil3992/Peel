@@ -2,7 +2,7 @@ package com.peel.models;
 
 import java.util.List;
 
-public class Attribute {
+public final class Attribute {
 
 	private final List<String> countries;
 	private final String language;
